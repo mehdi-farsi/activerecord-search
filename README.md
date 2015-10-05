@@ -29,7 +29,7 @@ Use case:
 A model named Post that contains 2 fields: `title:string` and `content:text`.
 We want to search any posts that include `Ruby` in their content:
 
-##### In `app/models/posts`:
+##### In `app/models/posts.rb`:
 
 ```ruby
 class Post < ActiveRecord::Base
@@ -52,11 +52,9 @@ end
 
 ## More about the API
 
-Append the model name to this method results from the following question: What is the probability that a `search` method already exists in the model?
-
 ##### search_option method
 
-`search_option` method specifies where to search in the string. Available options:
+`search_option` method specifies where to search in the sentence. Available options:
 
 - `:start_with` : the sentence starts with the pattern.
 - `:end_with`   : the sentence ends with the pattern.
@@ -64,23 +62,25 @@ Append the model name to this method results from the following question: What i
 
 ##### search_MODEL method
 
-A method :search_MODEL is auto-generated. some examples:
+A method :search_MODEL is auto-generated. It's the method used in controller in our above example. some examples:
  
 - for a model Post a method `search_post` is generated.
 - for a model Book a method `search_book` is generated.
 
-The method can accept a second argument which is a `search_option` argument:
+The method can accept a second argument which is a `search_option`. Example:
 
 ```ruby
 class PostsController < ApplicationController
 
     def index
-        Post.search_post("Ruby", :start_with)
+        Post.search_post("Ruby", :start_with) # See search_option method section for more information
     end
     
     ...
 end
 ```
+
+Append the model name to this method results from the following question: What is the probability that a `search` method already exists in the model?
 
 In this example, the search-engine will search any posts that the content starts with `"Ruby"`.
 
