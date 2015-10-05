@@ -1,4 +1,5 @@
 require "activerecord/search/version"
+require "activerecord/base"
 
 module Activerecord
   module Search
