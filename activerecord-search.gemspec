@@ -28,9 +28,13 @@ Gem::Specification.new do |spec|
     - Twitter: @farsi_mehdi
     - Github: mehdi-farsi
 
-  I did this gem to help to solve a problem. My reward is to see you using it.
+  This project permits to help to solve a common problem. My reward is to see you using it.
 
-  So please, feel free to 'star' the project on GitHub. Many Thanks !
+  So please, feel free to 'star' the project on GitHub:
+
+  https://github.com/mehdi-farsi/activerecord-search
+  
+   Many Thanks !
   EOF
 
   spec.add_development_dependency "bundler", "~> 1.10"
