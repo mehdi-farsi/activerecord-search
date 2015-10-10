@@ -21,7 +21,8 @@ class Activerecord::BaseTest < Minitest::Test
       multi_fields: [@cat_start, @cat_middle, @cat_end, @cat_name],
       anywhere:     [@cat_start, @cat_middle, @cat_end],
       end_with:     [@cat_end],
-      start_with:   [@cat_start]
+      start_with:   [@cat_start],
+      all_name:     [@cat_name]
     }
   end
 
@@ -73,7 +74,7 @@ class Activerecord::BaseTest < Minitest::Test
     tiger_cats = Cat.search_cat("' OR name LIKE '%tiger")
 
     assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
-    assert tiger_cats.to_a.empty?  
+    assert tiger_cats.to_a.empty?
   end
 
   def test_search_field_fail_if_no_argument
@@ -83,16 +84,34 @@ class Activerecord::BaseTest < Minitest::Test
   end
 
   ###############################
+  # test on :search_MODEL method
+  ###############################
+
+  def test_search_option_given_as_parameter
+    tiger_cats = Cat.search_cat("tiger", :anywhere)
+
+    assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
+    assert_equal tiger_cats, @results[:anywhere]
+  end
+
+  def test_search_field_given_as_parameter
+    tiger_cats = Cat.search_cat("tiger", nil, [:name])
+
+    assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
+    assert_equal tiger_cats, @results[:all_name]
+  end
+
+  ###############################
   # test on :search_field method
   ###############################
 
   def test_search_field_with_single_field_as_argument
-    Cat.search_field :description
+    Cat.search_field :name
 
     tiger_cats = Cat.search_cat("tiger")
 
     assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
-    assert_equal tiger_cats.to_a, @results[:anywhere]   
+    assert_equal tiger_cats.to_a, @results[:all_name]   
   end
 
   def test_search_field_with_array_as_argument
@@ -105,12 +124,12 @@ class Activerecord::BaseTest < Minitest::Test
   end
 
   def test_search_fields_with_single_field_as_argument
-    Cat.search_fields :description
+    Cat.search_fields :name
 
     tiger_cats = Cat.search_cat("tiger")
 
     assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
-    assert_equal tiger_cats.to_a, @results[:anywhere]   
+    assert_equal tiger_cats.to_a, @results[:all_name]   
   end
 
   def test_search_fields_with_array_as_argument

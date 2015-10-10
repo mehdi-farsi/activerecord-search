@@ -17,12 +17,14 @@ module ActiveRecord
           class << #{subclass} 
             attr_reader :search_option, :search_fields
 
-            def search_#{subclass.to_s.underscore}(words, option = nil)
+            def search_#{subclass.to_s.underscore}(words, option = nil, fields = [])
               formatted_words = format_search(words, option)
+
+              fields = fields.empty? ? @search_fields.dup : fields
 
               search_scope  = []
               search_params = {}
-              @search_fields.each do |field|
+              fields.each do |field|
                 search_params[field] = formatted_words
                 search_scope << field.to_s + " LIKE :" + field.to_s
               end
