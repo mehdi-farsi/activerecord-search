@@ -27,7 +27,6 @@ Below is an example of the features offered by this plugin:
 Use case:
 
 A model named Post that contains 2 fields: `title:string` and `content:text`.
-We want to search any posts that include `Ruby` in their content:
 
 ##### In `app/models/posts.rb`:
 
@@ -43,7 +42,15 @@ end
 class PostsController < ApplicationController
 
     def index
-        Post.search_post("Ruby")
+        Post.search_post("Ruby") # It uses the :search_field and :search_option values
+        Post.search_post("Ruby", :start_with) # It's possible to override the :search_option value
+        Post.search_post("Ruby", :start_with, [:name, :content]) # It's possible to override the :search_option and :search_field values
+        
+        # Some helper method are available
+        Post.start_with("Ruby")      # all record that start with 'Ruby'
+        Post.end_with("Ruby")        # all record that end with 'Ruby'
+        Post.search_anywhere("Ruby") # all record that search anywhere with 'Ruby'
+       
     end
     
     ...
@@ -52,7 +59,7 @@ end
 
 ## More about the API
 
-##### search_option method
+##### search_option method (Call in model)
 
 `search_option` method specifies where to search in the sentence. Available options:
 
