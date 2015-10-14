@@ -7,7 +7,7 @@ require 'activerecord/base'
 Gem::Specification.new do |spec|
   spec.name          = "activerecord-search"
   spec.version       = Activerecord::Search::VERSION
-  spec.date          = '2015-10-05'
+  spec.date          = Time.now.strftime("%F")
   spec.authors       = ["Mehdi FARSI"]
   spec.email         = ["mehdifarsi.pro@gmail.com"]
 
