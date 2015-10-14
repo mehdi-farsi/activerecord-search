@@ -83,6 +83,13 @@ class Activerecord::BaseTest < Minitest::Test
     }
   end
 
+  def test_search_cat_fail_if_words_is_nil
+    e = assert_raises(::TypeError) {
+      Cat.search_cat(nil, :anywhere)
+    }
+    assert_equal e.message, "no implicit conversion of nil into String"
+  end
+
   ###############################
   # test on :search_MODEL method
   ###############################
@@ -138,12 +145,52 @@ class Activerecord::BaseTest < Minitest::Test
     tiger_cats = Cat.search_cat("tiger")
 
     assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
-    assert_equal tiger_cats.to_a, @results[:multi_fields]   
+    assert_equal tiger_cats.to_a, @results[:multi_fields]
+  end
+
+  #################################################
+  # test :start_with method. It wraps search_MODEL
+  #################################################
+
+  def test_start_with_method
+    Cat.search_field :description
+
+    tiger_cats = Cat.start_with("tiger")
+
+    assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
+    assert_equal tiger_cats.to_a, @results[:start_with]
+  end
+
+  #################################################
+  # test :start_with method. It wraps search_MODEL
+  #################################################
+
+  def test_end_with_method
+    Cat.search_field :description
+
+    tiger_cats = Cat.end_with("tiger")
+
+    assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
+    assert_equal tiger_cats.to_a, @results[:end_with]
+  end
+
+  #################################################
+  # test :start_with method. It wraps search_MODEL
+  #################################################
+
+  def test_search_anywhere_method
+    Cat.search_field :description
+
+    tiger_cats = Cat.search_anywhere("tiger")
+
+    assert_instance_of ::Cat::ActiveRecord_Relation, tiger_cats
+    assert_equal tiger_cats.to_a, @results[:anywhere]
   end
 
   #######################################################
   # Set search option by using the :search_option method
   #######################################################
+
   def test_default_option_fail_if_more_than_two_search_option
     e = assert_raises(::ArgumentError) {
       Cat.search_option :start_with, :anywhere
@@ -166,6 +213,7 @@ class Activerecord::BaseTest < Minitest::Test
   ##########################################################
   # Set search option using :search_MODEL :option parameter
   ##########################################################
+
   def test_param_option_fail_if_more_than_two_search_option
     e = assert_raises(ActiveRecord::SearchError) {
       Cat.search_cat "Tiger", start_with: true, anywhere: true

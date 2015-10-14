@@ -32,13 +32,23 @@ module ActiveRecord
               where([search_scope.join(" OR "), search_params])
             end
 
+            def start_with(words)
+              search_#{subclass.to_s.underscore}(words, :start_with)
+            end
+
+            def end_with(words)
+              search_#{subclass.to_s.underscore}(words, :end_with)
+            end
+
+            def search_anywhere(words)
+              search_#{subclass.to_s.underscore}(words, :anywhere)
+            end
+
             def search_fields(fields)
               @search_fields = [fields].flatten
             end
             alias_method :search_field, :search_fields 
 
-
-            # If options are given, they override the default options behavior
             def format_search(words, option)
               if !option.nil?
                 format_with_option(words, option)
