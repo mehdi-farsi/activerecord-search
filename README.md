@@ -67,14 +67,24 @@ end
 - `:end_with`   : the sentence ends with the pattern.
 - `:anywhere`   : search anywhere in the sentence. [DEFAULT OPTION]
 
+##### search_field method (Call in model)
+
+`search_field` method specifies which field is used for the search. It's possible to search in multiple fields by using the method `search_fields([])`: 
+
+```ruby
+class Post < ActiveRecord::Base
+    search_fields [:title, :content] # search on :title OR :content 
+end
+```
+
 ##### search_MODEL method
 
-A method :search_MODEL is auto-generated. It's the method used in controller in our above example. some examples:
+A method :search_MODEL is auto-generated. some examples:
  
 - for a model Post a method `search_post` is generated.
 - for a model Book a method `search_book` is generated.
 
-The method can accept a second argument which is a `search_option`. Example:
+The method can accept more arguments. Example:
 
 ```ruby
 class PostsController < ApplicationController
@@ -89,20 +99,6 @@ end
 ```
 
 Append the model name to this method results from the following question: What is the probability that a `search` method already exists in the model?
-
-In this example, the search-engine will search any posts that the content starts with `"Ruby"`.
-
-##### search_field method
-
-`search_field` method specifies which field is used for the search. It's possible to search in multiple fields by using the method `search_fields([])`: 
-
-```ruby
-class Post < ActiveRecord::Base
-    search_fields [:title, :content]
-end
-```
-
-In this example, the search-engine will search any posts that include `"Ruby"` in their content OR in their title.
 
 ## Development
 
