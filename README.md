@@ -81,6 +81,7 @@ class PostsController < ApplicationController
 
     def index
         Post.search_post("Ruby", :start_with) # See search_option method section for more information
+        Post.search_post("Ruby", :start_with, [:name, :content]) # it's possible to override the search_field option
     end
     
     ...
