@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-This plugin permits, with few lines of code, to have a lightweight and steady ActiveRecord search engine.
+This plugin permits, with few lines of code, to have a lightweight and steady ActiveRecord search-engine.
 
 Below is an example of the features offered by this plugin:
 
