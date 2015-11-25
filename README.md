@@ -47,9 +47,9 @@ class PostsController < ApplicationController
         Post.search_post("Ruby", :start_with, [:name, :content]) # It's possible to override the :search_option and :search_field values
         
         # Some helper method are available
-        Post.start_with("Ruby")      # all record that start with 'Ruby'
-        Post.end_with("Ruby")        # all record that end with 'Ruby'
-        Post.search_anywhere("Ruby") # all record that search anywhere with 'Ruby'
+        Post.start_with("Ruby")      # all records that start with 'Ruby'
+        Post.end_with("Ruby")        # all records that end with 'Ruby'
+        Post.search_anywhere("Ruby") # all records that search anywhere with 'Ruby'
        
     end
     
