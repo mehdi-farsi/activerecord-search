@@ -59,7 +59,7 @@ end
 
 ## More about the API
 
-##### search_option method (Call in model)
+##### search_option method
 
 `search_option` method specifies where to search in the sentence. Available options:
 
@@ -67,7 +67,7 @@ end
 - `:end_with`   : the sentence ends with the pattern.
 - `:anywhere`   : search anywhere in the sentence. [DEFAULT OPTION]
 
-##### search_field method (Call in model)
+##### search_field method
 
 `search_field` method specifies which field is used for the search. It's possible to search in multiple fields by using the method `search_fields([])`: 
 
