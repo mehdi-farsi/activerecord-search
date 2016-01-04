@@ -61,7 +61,8 @@ end
 
 ##### search_option method
 
-`search_option` method specifies where to search in the sentence. Available options:
+`search_option` method specifies where to search in the sentence.<br />
+Available options:
 
 - `:start_with` : the sentence starts with the pattern.
 - `:end_with`   : the sentence ends with the pattern.
