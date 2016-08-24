@@ -14,7 +14,7 @@ module ActiveRecord
         super
         return if subclass.to_s.underscore == "active_record/schema_migration"
         class_eval <<-EOF
-          class << #{subclass} 
+          class << #{subclass}
             attr_reader :search_option, :search_fields
 
             def search_#{subclass.to_s.underscore}(words, option = nil, fields = [])
@@ -47,7 +47,7 @@ module ActiveRecord
             def search_fields(fields)
               @search_fields = [fields].flatten
             end
-            alias_method :search_field, :search_fields 
+            alias_method :search_field, :search_fields
 
             def format_search(words, option)
               if !option.nil?
@@ -61,7 +61,7 @@ module ActiveRecord
             def format_with_option(words, option)
               case option
                 when :start_with then words + '%'
-                when :end_with   then '%' + words 
+                when :end_with   then '%' + words
                 when :anywhere   then '%' + words + '%'
                 else
                   raise SearchError
