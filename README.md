@@ -1,6 +1,6 @@
 # ActiveRecord::Search
 
-a lightweight search-engine using ActiveRecord
+A lightweight search engine using ActiveRecord
 
 ## Installation
 
@@ -20,13 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-This plugin permits, with few lines of code, to have a lightweight and steady ActiveRecord search-engine.
+With few lines of code, this plugin permits a lightweight and steady ActiveRecord search engine.
 
 Below is an example of the features offered by this plugin:
 
 Use case:
 
-A model named Post that contains 2 fields: `title:string` and `content:text`.
+There is a model named `Post` that contains two fields: `title:string` and `content:text`.
 
 ##### In `app/models/posts.rb`:
 
@@ -80,7 +80,7 @@ end
 
 ##### search_MODEL method
 
-A method :search_MODEL is auto-generated. some examples:
+A method `:search_MODEL` is auto-generated. some examples:
  
 - for a model Post a method `search_post` is generated.
 - for a model Book a method `search_book` is generated.
@@ -89,11 +89,10 @@ The method can accept more arguments. Example:
 
 ```ruby
 class PostsController < ApplicationController
-
-    def index
-        Post.search_post("Ruby", :start_with) # See search_option method section for more information
-        Post.search_post("Ruby", :start_with, [:name, :content]) # it's possible to override the search_field option
-    end
+  def index
+    Post.search_post("Ruby", :start_with) # See search_option method section for more information
+    Post.search_post("Ruby", :start_with, [:name, :content]) # it's possible to override the search_field option
+  end
     
     ...
 end
