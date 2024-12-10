@@ -1,4 +1,4 @@
-# ActiveRecord::Search
+# `ActiveRecord::Search`
 
 A lightweight search engine using ActiveRecord
 
